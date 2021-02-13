@@ -20,6 +20,12 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: Build the Docker image
+    - name: Build the Docker image for tests
       run: |
         docker-compose -f test-docker-compose.yml up --build
+    - name: Build the Docker image for the Server App
+      run: |
+        docker-compose -f prod-docker-compose.yml build
+    - name: Push App Server to docker hub
+      run: |
+        docker push tandavala/challenge-encurtador-backend
