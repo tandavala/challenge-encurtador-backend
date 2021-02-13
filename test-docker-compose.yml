@@ -4,7 +4,7 @@ services:
   test-server:
     env_file:
       - .env
-    image: tandavala/challenge-encurtador-backend
+    image: tandavala/challenge-encurtador-test
     build: 
       context: .
       dockerfile: Dockerfile-test
