@@ -16,4 +16,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
-        docker-compose -f prod-docker-compose.yml up --build
+        docker-compose -f test-docker-compose.yml up --build
