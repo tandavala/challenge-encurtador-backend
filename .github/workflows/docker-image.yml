@@ -35,5 +35,5 @@ jobs:
       with:
         email: ${{ secrets.HEROKU_EMAIL }}
         api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: "challenge-encutador-backend"
+        heroku_apps: '[{"imagename":"tandavala/challenge-encurtador-backend","appname": ${{ secrets.HEROKU_APP_NAME }},"apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
         docker_compose_file: './prod-docker-compose.yml'  
