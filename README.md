@@ -9,17 +9,17 @@ o Challange encurtador Backend, este é um desafio da wiser edução a ideia é 
 ## Requisitos functionais
 
 - [ ] Dado uma URL como parâmetro, devemos obter uma URL única curta e aleatório.
-- [ ] Dado uma encurtada, os usuários devem ser redirecionados para o URL original
+- [ ] Dado uma URL encurtada, os usuários devem ser redirecionados para o URL original
 - [ ] Os usuários devem ter a optção de poder escolher um link personalizado
 - [ ] Os usuários devem, opcionalmente, ser capazes de escolher uma data de expiração.
 
 - [ ] a novo url curta de ter a possibilidade de ter data de validade
-- [ ] precisamos de coletar estatisticas ex: numeros de cliques.
+
 - [ ] alem de saber o numeros de cliques tambem queremos saber os despositivos dos usuarios
 
 ## Resito não functionais
 
-- [ ] O sistema deve estar altamente disponível. Cada vez que acessamos a URL curta, devemos redirecionar para a página original
+- [ ] O sistema deve estar altamente disponível. Quando um usuário usar a URL curta, deve ser redirecionado para a página original
 - [ ] O sistema deve funcionar com latência mínima. A geração de pequenos URLs e o redirecionamento devem ser rápidos
 - [ ] O sistema deve ser escalonável, ele deve lidar com a quantidade crescente de criação de URL e solicitações de leitura.
 - [ ] Devemos saber quantas vezes o link foi acessado
