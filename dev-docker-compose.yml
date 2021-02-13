@@ -4,7 +4,7 @@ services:
   app-server:
     env_file:
       - .env
-    image: pyze/challenge-encurtador-backend
+    image: tandavala/challenge-encurtador-backend
     build: 
       context: .
       dockerfile: Dockerfile-dev
