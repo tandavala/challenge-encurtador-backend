@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Url extends BaseEntity {
+export class Url {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,12 +18,12 @@ export class Url extends BaseEntity {
   @Column()
   shortenUrl: string;
 
-  @Column({ type: 'timestamp' })
-  expirationDate: Date;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
+  constructor(longUrl?: string, shortengUrl?: string);
+  constructor(longUrl: string, shortenUrl: string);
+  constructor(longUrl: string, shortenUrl: string);
+  constructor(longUrl?: string, shoternUrl?: string) {
+    this.longUrl = longUrl || '';
+    this.shortenUrl = shoternUrl || '';
+    // this.expirationDate = expirationDate || undefined;
+  }
 }
