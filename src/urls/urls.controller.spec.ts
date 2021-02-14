@@ -17,10 +17,7 @@ describe('UrlsController', () => {
         {
           provide: UrlsService,
           useValue: {
-            findAll: jest.fn().mockResolvedValue([
-              { longUrl, shortenUrl },
-              { longUrl: 'https://twitter.com', shortenUrl: 'awesome' },
-            ]),
+            findAll: jest.fn().mockResolvedValue([{ longUrl, shortenUrl }]),
             findOne: jest.fn().mockImplementation((id: number) =>
               Promise.resolve({
                 longUrl: longUrl,
