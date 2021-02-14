@@ -3,7 +3,7 @@ import { CreateUrlDto } from './dto/url.dto';
 import { UrlsController } from './urls.controller';
 import { UrlsService } from './urls.service';
 
-const longUrl = 'https://google.com';
+const longUrl = 'https://google.com/';
 const shortenUrl = 'hottopic';
 
 describe('UrlsController', () => {

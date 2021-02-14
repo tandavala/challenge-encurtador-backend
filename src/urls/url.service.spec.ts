@@ -2,15 +2,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Url } from './entiry/url.entity';
+import { UrlValidationTime } from './shared/url-validation-time';
 import { UrlsService } from './urls.service';
 
-const longUrl = 'https://google.com';
+const longUrl = 'https://google.com/';
 const shortenUrl = 'hottopics';
+const expTimeStamp = '1 week';
 
 const urlArray = [
-  new Url('https://google.com', 'hottopics'),
-  new Url('https://twitter.com', 'awesome'),
-  new Url('https://facebook.com', 'makehappen'),
+  new Url('https://google.com/', 'hottopics'),
+  new Url('https://twitter.com/', 'awesome'),
+  new Url('https://facebook.com/', 'makehappen'),
 ];
 
 const oneUrl = new Url(longUrl, shortenUrl);
@@ -65,11 +67,16 @@ describe('UrlService', () => {
         service.create({
           longUrl,
           shortenUrl,
+          expirationTimeStamp: UrlValidationTime.TWO_MINUTES,
         }),
       ).resolves.toEqual(oneUrl);
 
       expect(repo.create).toBeCalledTimes(1);
-      expect(repo.create).toBeCalledWith({ longUrl, shortenUrl });
+      expect(repo.create).toBeCalledWith({
+        longUrl,
+        shortenUrl,
+        expirationTimeStamp: UrlValidationTime.TWO_MINUTES,
+      });
       expect(repo.save).toBeCalledTimes(1);
     });
   });

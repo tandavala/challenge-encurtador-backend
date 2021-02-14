@@ -1,6 +1,6 @@
 import * as md5 from 'md5';
 import * as URI from 'uri-js';
-
+import * as nanoid from 'nanoid';
 export class UrlHasher {
   private url: string;
 
@@ -9,7 +9,7 @@ export class UrlHasher {
   }
 
   get hash(): string {
-    return md5(this.normalizedUrl);
+    return nanoid(10);
   }
 
   get normalizedUrl(): string {

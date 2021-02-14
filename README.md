@@ -18,7 +18,7 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [ ] Dado uma URL encurtada, os usuários devem ser redirecionados para o URL original.
 - [ ] Os usuários devem ter a opção de poder escolher um link personalizado.
 - [ ] Os usuários devem, opcionalmente, ser capazes de escolher uma data de expiração.
-
+- [ ] O usario poder fazer login via gmail
 - [ ] A nova url curta deve ter a possibilidade de ter data de expiração.
 
 ## Resito não functionais
@@ -31,3 +31,5 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [ ] alem de saber o numeros de cliques tambem queremos saber os despositivos dos usuarios
 
 - [x] Limitar as solicitações de API.
+- [x] Limitar o usuario de encurtar o nosso dominio
+- [] Só poderá eliminar uma url o usuário que criou a url.

@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UrlHasher } from '../utils/url-helpers';
 import { Repository } from 'typeorm';
 import { CreateUrlDto } from './dto/url.dto';
 import { Url } from './entiry/url.entity';
+import { UrlValidationTime } from './shared/url-validation-time';
 
 @Injectable()
 export class UrlsService {
@@ -17,7 +19,13 @@ export class UrlsService {
   }
   async create(createUrlDto: CreateUrlDto): Promise<Url> {
     const { longUrl, shortenUrl } = createUrlDto;
-    const newUrl = this.urlRepo.create({ longUrl, shortenUrl });
+    const hasher = new UrlHasher(longUrl);
+
+    const newUrl = this.urlRepo.create({
+      longUrl: hasher.normalizedUrl,
+      shortenUrl: shortenUrl || hasher.hash,
+      expirationTimeStamp: UrlValidationTime.TWO_MINUTES,
+    });
     await await this.urlRepo.save(newUrl);
     return newUrl;
   }

@@ -2,6 +2,7 @@ import {
   IsDate,
   IsDateString,
   IsNotEmpty,
+  IsOptional,
   IsUrl,
   IS_DATE,
 } from 'class-validator';
@@ -11,6 +12,8 @@ export class CreateUrlDto {
   @IsUrl()
   longUrl: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   shortenUrl: string;
+
+  expirationTimeStamp: string;
 }
