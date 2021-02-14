@@ -20,6 +20,7 @@ describe('UrlsController', () => {
             findAll: jest.fn().mockResolvedValue([{ longUrl, shortenUrl }]),
             findOne: jest.fn().mockImplementation((id: number) =>
               Promise.resolve({
+                id,
                 longUrl: longUrl,
                 breed: shortenUrl,
               }),

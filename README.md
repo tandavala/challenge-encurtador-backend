@@ -30,4 +30,4 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 
 - [ ] alem de saber o numeros de cliques tambem queremos saber os despositivos dos usuarios
 
-- [ ] Limitar as solicitações de API.
+- [x] Limitar as solicitações de API.
