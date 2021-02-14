@@ -10,14 +10,15 @@ export class UrlsService {
     @InjectRepository(Url) private readonly urlRepo: Repository<Url>,
   ) {}
   async findAll(): Promise<Url[]> {
-    return this.urlRepo.find();
+    return await this.urlRepo.find();
   }
   async findOne(id: number): Promise<Url> {
     return this.urlRepo.findOneOrFail(id);
   }
   async create(createUrlDto: CreateUrlDto): Promise<Url> {
-    const newUrl = this.urlRepo.create(createUrlDto);
-    await this.urlRepo.save(newUrl);
+    const { longUrl, shortenUrl } = createUrlDto;
+    const newUrl = this.urlRepo.create({ longUrl, shortenUrl });
+    await await this.urlRepo.save(newUrl);
     return newUrl;
   }
   async getByShortenUrl(shortenUrl: string): Promise<Url> {
