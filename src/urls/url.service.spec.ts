@@ -45,9 +45,10 @@ describe('UrlService', () => {
     expect(service).toBeDefined();
   });
 
-  describe('agora', () => {
-    it('descricao', () => {
-      expect(1).toBe(1);
+  describe('getAll', () => {
+    it('should return an array of urls', async () => {
+      const urls = await service.findAll();
+      expect(urls).toEqual(urlArray);
     });
   });
 });
