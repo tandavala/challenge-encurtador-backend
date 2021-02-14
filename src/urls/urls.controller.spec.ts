@@ -49,6 +49,17 @@ describe('UrlsController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  describe('findAll()', () => {
+    it('should find all urls', async () => {
+      await expect(controller.findAll()).resolves.toEqual([
+        {
+          longUrl,
+          shortenUrl,
+        },
+      ]);
+    });
+  });
   describe('create()', () => {
     it('should create a new url', async () => {
       const newUrl: CreateUrlDto = {
