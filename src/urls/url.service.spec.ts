@@ -59,4 +59,18 @@ describe('UrlService', () => {
       expect(repoSpy).toBeCalledWith(1);
     });
   });
+  describe('create()', () => {
+    it('should successfully create a url', () => {
+      expect(
+        service.create({
+          longUrl,
+          shortenUrl,
+        }),
+      ).resolves.toEqual(oneUrl);
+
+      expect(repo.create).toBeCalledTimes(1);
+      expect(repo.create).toBeCalledWith({ longUrl, shortenUrl });
+      expect(repo.save).toBeCalledTimes(1);
+    });
+  });
 });
