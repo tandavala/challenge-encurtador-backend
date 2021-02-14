@@ -11,4 +11,7 @@ export class UrlsService {
   async findAll(): Promise<Url[]> {
     return this.urlRepo.find();
   }
+  async findOne(id: number): Promise<Url> {
+    return this.urlRepo.findOneOrFail(id);
+  }
 }

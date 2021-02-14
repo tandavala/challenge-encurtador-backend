@@ -50,12 +50,13 @@ describe('UrlService', () => {
       const urls = await service.findAll();
       expect(urls).toEqual(urlArray);
     });
-    it('findOne', () => {
-      it('should get a single url', () => {
-        const repoSpy = jest.spyOn(repo, 'findOneOrFail');
-        expect(service.findOne(1)).resolves.toEqual(oneUrl);
-        expect(repoSpy).toBeCalledWith({ id: 1 });
-      });
+  });
+  describe('findOne', () => {
+    it('should get a single url', async () => {
+      const repoSpy = await jest.spyOn(repo, 'findOneOrFail');
+
+      expect(service.findOne(1)).resolves.toEqual(oneUrl);
+      expect(repoSpy).toBeCalledWith(1);
     });
   });
 });
