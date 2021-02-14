@@ -8,4 +8,7 @@ export class UrlsService {
   constructor(
     @InjectRepository(Url) private readonly urlRepo: Repository<Url>,
   ) {}
+  async findAll(): Promise<Url[]> {
+    return this.urlRepo.find();
+  }
 }
