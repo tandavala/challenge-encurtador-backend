@@ -56,7 +56,6 @@ describe('UrlsController', () => {
         shortenUrl,
       };
       await expect(controller.create(newUrl)).resolves.toEqual({
-        id: 1,
         ...newUrl,
       });
     });
