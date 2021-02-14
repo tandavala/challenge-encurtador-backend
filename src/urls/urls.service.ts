@@ -1,10 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UrlHasher } from '../utils/url-helpers';
 import { Repository } from 'typeorm';
 import { CreateUrlDto } from './dto/url.dto';
 import { Url } from './entiry/url.entity';
 import { UrlValidationTime } from './shared/url-validation-time';
+import * as expires from 'expires';
+import * as crypto from 'crypto-random-string';
 
 @Injectable()
 export class UrlsService {
@@ -15,21 +21,46 @@ export class UrlsService {
     return await this.urlRepo.find();
   }
   async findOne(id: number): Promise<Url> {
-    return this.urlRepo.findOneOrFail(id);
+    const url = await this.urlRepo.findOne({ id });
+    if (!url) throw new NotFoundException('Esta url não existe');
+    return url;
   }
   async create(createUrlDto: CreateUrlDto): Promise<Url> {
     const { longUrl, shortenUrl } = createUrlDto;
+    const cryptoUrl = crypto({ length: 10, type: 'url-safe' });
     const hasher = new UrlHasher(longUrl);
 
+    const shorten = shortenUrl || cryptoUrl;
+    const timestamp = expires.after(UrlValidationTime.TWO_MINUTES);
+    const alreadyExist = await this.urlRepo.findOne({ hash: hasher.hash });
+
+    console.log(hasher.hash);
+
+    if (alreadyExist)
+      throw new ForbiddenException('Esta url já está sendo usada');
+
     const newUrl = this.urlRepo.create({
-      longUrl: hasher.normalizedUrl,
-      shortenUrl: shortenUrl || hasher.hash,
-      expirationTimeStamp: UrlValidationTime.TWO_MINUTES,
+      longUrl: hasher.normalizedUrl.toLowerCase(),
+      shortenUrl: shorten,
+      hash: hasher.hash,
+      expires: timestamp,
     });
-    await await this.urlRepo.save(newUrl);
+
+    await this.urlRepo.save(newUrl);
+
     return newUrl;
   }
+  async findUrl(url: string): Promise<Url> {
+    return await this.urlRepo.findOne({ shortenUrl: url });
+  }
   async getByShortenUrl(shortenUrl: string): Promise<Url> {
-    return this.urlRepo.findOneOrFail({ shortenUrl });
+    const url = await this.urlRepo.findOne({ shortenUrl });
+    if (!url) throw new NotFoundException('Esta url não existe');
+
+    // TODO Verificar se o link ainda é valido
+    // se for valido o usuario deve usar caso contrario
+    // terminamos a requisição com uma informação ao usuario
+
+    return url;
   }
 }

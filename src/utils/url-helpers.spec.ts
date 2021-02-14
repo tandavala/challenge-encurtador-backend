@@ -15,4 +15,26 @@ describe('UrlHasher', () => {
       expect(url.normalizedUrl).toEqual('https://google.com/?a=b&c=d');
     });
   });
+
+  describe('hash', () => {
+    it('should generate the same hash for the same URL', () => {
+      const one = new UrlHasher('https://google.com');
+      const two = new UrlHasher('https://google.com');
+
+      expect(one.hash).toEqual(two.hash);
+    });
+
+    it('generates the same hash for the same GET paramenters in differente order', () => {
+      const one = new UrlHasher('https://google.com/?a=b&c=d');
+      const two = new UrlHasher('https://google.com/?c=d&a=b');
+
+      expect(one.hash).toEqual(two.hash);
+    });
+    it('generate a different hash for trailing vs trailing slash', () => {
+      const one = new UrlHasher('http://google.com/path/');
+      const two = new UrlHasher('http://google.com/path');
+
+      expect(one.hash).not.toEqual(two.hash);
+    });
+  });
 });

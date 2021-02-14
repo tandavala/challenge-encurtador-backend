@@ -1,4 +1,5 @@
 import {
+  IsAlphanumeric,
   IsDate,
   IsDateString,
   IsNotEmpty,
@@ -15,5 +16,9 @@ export class CreateUrlDto {
   @IsOptional()
   shortenUrl: string;
 
-  expirationTimeStamp: string;
+  @IsNotEmpty()
+  expires: string;
+
+  @IsAlphanumeric()
+  hash: string;
 }

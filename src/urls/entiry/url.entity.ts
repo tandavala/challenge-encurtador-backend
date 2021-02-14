@@ -16,31 +16,36 @@ export class Url {
   longUrl: string;
 
   @Column()
+  hash: string;
+
+  @Column()
   shortenUrl: string;
 
   @Column()
-  expirationTimeStamp: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
+  expires: string;
 
   constructor(
     longUrl?: string,
+    hash?: string,
     shortengUrl?: string,
-    expirationTimeStamp?: string,
+    expires?: string,
   );
-  constructor(longUrl: string, shortenUrl: string, expirationTimeStamp: string);
-  constructor(longUrl: string, shortenUrl: string, expirationTimeStamp: string);
+  constructor(longUrl: string, shortenUrl: string, expires: string);
+  constructor(
+    longUrl: string,
+    hash: string,
+    shortenUrl: string,
+    expires: string,
+  );
   constructor(
     longUrl?: string,
+    hash?: string,
     shoternUrl?: string,
-    expirationTimeStamp?: string,
+    expires?: string,
   ) {
     this.longUrl = longUrl || '';
     this.shortenUrl = shoternUrl || '';
-    this.expirationTimeStamp = expirationTimeStamp || '';
+    this.expires = expires || '';
+    this.hash = hash || '';
   }
 }

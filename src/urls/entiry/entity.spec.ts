@@ -6,6 +6,6 @@ describe('Url class', () => {
     expect(url).toBeTruthy();
     expect(url.longUrl).toBe('');
     expect(url.shortenUrl).toBe('');
-    expect(url.expirationTimeStamp).toBe('');
+    expect(url.expires).toBe('');
   });
 });

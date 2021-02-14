@@ -1,12 +1,13 @@
+import 'dotenv/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 export const typeOrmConfig: TypeOrmModule = {
   type: 'postgres',
-  host: '127.0.0.1',
+  host: process.env.RDS_HOSTNAME,
   port: 5432,
-  username: 'postgres',
-  password: '1cristo2bom3',
-  database: 'encurtador',
+  username: process.env.RDS_USERNAME,
+  password: process.env.RDS_PASSWORD,
+  database: process.env.RDS_DATABASE,
   entities: [__dirname + '/../**/*.entity.js'],
   synchronize: true, // but not in production
 };

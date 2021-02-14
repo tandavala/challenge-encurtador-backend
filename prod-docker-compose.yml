@@ -7,7 +7,7 @@ services:
     image: tandavala/challenge-encurtador-backend
     build: 
       context: .
-      dockerfile: Dockerfile-prod
+      dockerfile: Dockerfile-dev
     container_name: app-server
     ports: 
       - ${SERVER_PORT}:${SERVER_PORT}
@@ -15,7 +15,6 @@ services:
     networks: 
       - challenge-encurtador_network
     depends_on: 
-      - redis
       - postgres
   postgres:
     container_name: challenge-encurtador_postgres
@@ -32,17 +31,6 @@ services:
     ports: 
       - ${RDS_PORT}:${RDS_PORT}
   
-  redis:
-    container_name: challenge-encurtador_redis
-    image: redis
-    ports: 
-      - ${REDIS_PORT}:${REDIS_PORT}
-    networks: 
-      - challenge-encurtador_network
-    volumes: 
-      - redis-data:/data
-    entrypoint: redis-server --appendonly yes
-    restart: always
 
   adminer:
     container_name: challenge-encurtador_adminer
@@ -58,7 +46,5 @@ networks:
     driver: bridge
 
 volumes: 
-  redis-data:
-    driver: local
   postgres-data:
     driver: local

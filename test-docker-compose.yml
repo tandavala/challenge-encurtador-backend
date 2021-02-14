@@ -21,7 +21,5 @@ networks:
     driver: bridge
 
 volumes: 
-  redis-data:
-    driver: local
   postgres-data:
     driver: local

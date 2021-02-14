@@ -4,10 +4,6 @@ import { UrlValidationTime } from '../shared/url-validation-time';
 export class UrlValidationPipe implements PipeTransform {
   readonly allowedValidation = [
     UrlValidationTime.TWO_MINUTES,
-    UrlValidationTime.THIRTY_MINUTES,
-    UrlValidationTime.ONE_DAY,
-    UrlValidationTime.ONE_HOUR,
-    UrlValidationTime.ONE_MONTH,
     UrlValidationTime.ONE_WEEK,
   ];
 

@@ -4,6 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Url } from '../urls/entiry/url.entity';
 import { UrlsService } from '../urls/urls.service';
 import { Repository } from 'typeorm';
+import * as expires from 'expires';
 
 describe('UrlService using createMock with DI', () => {
   let repo: Repository<Url>;
@@ -42,6 +43,7 @@ describe('UrlService using createMock with DI', () => {
         id: 1,
         longUrl: 'https://google.com',
         shortenUrl: 'hottopic',
+        expires: expires.after('2 seconds'),
       };
       repo.find.mockResolvedValue([url]);
       expect(await repo.find()).toEqual([url]);
