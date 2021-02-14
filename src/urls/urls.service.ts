@@ -20,4 +20,7 @@ export class UrlsService {
     await this.urlRepo.save(newUrl);
     return newUrl;
   }
+  async getByShortenUrl(shortenUrl: string): Promise<Url> {
+    return this.urlRepo.findOneOrFail({ shortenUrl });
+  }
 }

@@ -73,4 +73,11 @@ describe('UrlService', () => {
       expect(repo.save).toBeCalledTimes(1);
     });
   });
+
+  describe('show URL by shorten', () => {
+    it('should get one url by shorten', async () => {
+      const repoSpy = await jest.spyOn(repo, 'findOneOrFail');
+      expect(service.getByShortenUrl(shortenUrl)).resolves.toEqual(oneUrl);
+    });
+  });
 });
