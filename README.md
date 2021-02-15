@@ -33,3 +33,7 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [ ] Devemos saber quantas vezes o link foi acessado
 
 - [ ] alem de saber o numeros de cliques tambem queremos saber os despositivos dos usuarios
+
+# Instruções para rodar o sistema
+
+Para rodar

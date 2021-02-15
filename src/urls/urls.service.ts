@@ -9,7 +9,7 @@ import { Repository } from 'typeorm';
 import { CreateUrlDto } from './dto/url.dto';
 import { Url } from './entiry/url.entity';
 import { UrlValidationTime } from './shared/url-validation-time';
-import * as expires from 'expires';
+import * as Expires from 'expires';
 import * as crypto from 'crypto-random-string';
 
 @Injectable()
@@ -26,15 +26,18 @@ export class UrlsService {
     return url;
   }
   async create(createUrlDto: CreateUrlDto): Promise<Url> {
-    const { longUrl, shortenUrl } = createUrlDto;
+    const { longUrl, shortenUrl, expires } = createUrlDto;
     const cryptoUrl = crypto({ length: 10, type: 'url-safe' });
     const hasher = new UrlHasher(longUrl);
 
     const shorten = shortenUrl || cryptoUrl;
-    const timestamp = expires.after(UrlValidationTime.TWO_MINUTES);
-    const alreadyExist = await this.urlRepo.findOne({ hash: hasher.hash });
+    const timestamp = Expires.after(
+      expires === 'ONE_WEEK'
+        ? UrlValidationTime.ONE_WEEK
+        : UrlValidationTime.TWO_MINUTES,
+    );
 
-    console.log(hasher.hash);
+    const alreadyExist = await this.urlRepo.findOne({ hash: hasher.hash });
 
     if (alreadyExist)
       throw new ForbiddenException('Esta url já está sendo usada');

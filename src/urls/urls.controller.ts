@@ -1,11 +1,22 @@
-import { Body, Controller, Get, Param, Post, Query, Res } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Res,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { URL } from 'url';
 import { CreateUrlDto } from './dto/url.dto';
 import { Url } from './entiry/url.entity';
 import { UrlsService } from './urls.service';
 
+@ApiTags('urls')
 @Controller('urls')
 export class UrlsController {
   constructor(private readonly urlService: UrlsService) {}
@@ -26,6 +37,10 @@ export class UrlsController {
   @ApiResponse({
     description: 'para criar uma url encurtada, bastas usares este endpoint.',
   })
+  @ApiResponse({
+    status: 201,
+  })
+  @UsePipes(ValidationPipe)
   create(@Body() createUrlDto: CreateUrlDto): Promise<Url> {
     return this.urlService.create(createUrlDto);
   }
