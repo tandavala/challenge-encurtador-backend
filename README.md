@@ -46,3 +46,27 @@ Com o Git instalado na sua maquina e a URL do projeto em mãos, cria em algum lu
 git clone https://github.com/tandavala/challenge-encurtador-backend.git
 cd
 ```
+
+### Rodando o sistema
+
+Temos duas formas principais de rodar esse projecto.
+
+- Podemos rodar esse projecto como uma aplicação normal Nodejs, mais esse não é o foco principal. Basicamente nesse passo é instalar as dependencias e renomear o arquivo `.env.sample` para `.env`, tenha certeze que tens PostgreSQL instalado em sua maquina, informar os dados de acesso a base de dado no arqui .env executar o command `npm install` e posteriomente `npm run start:dev`, que estaras pronto para testar o sistema.
+
+- A segundo forma de rodar o projecto é usando o [Docker](https://www.docker.com/), antes deixa esclarever como configurei o docker no projecto. Este projecto conta com tres ficheiros docker.
+
+1. O primeiro ficheiro docker será usado em produção
+2. O Segundo ficheiro docker será usado em desenvolvimento
+3. O terceiro ficheiro Docker será usado em produção.
+
+Quero lembra - lo que cada fechiro docker conta com um ficheiro docker-compose por exemple o ficher docker para teste lhe chamei de `Dockerfile-test` e o seu Docker compose lhe chamai de `test-docker-compose.yml` assim segui a logica com os outros ficheiros com os prefixos de `dev` e `prod`.
+
+### Rodando os container
+
+Para rodar os contaier seguise - se o comanda:
+
+```
+docker-compose -f prod-docker-compose.yml up --build
+```
+
+A mesma logica se aplica para os dois ambientes, lembrando que para executar esse comando com sucesso precisamos estar na raiz do projecto.
