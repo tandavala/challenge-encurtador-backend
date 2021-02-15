@@ -16,14 +16,13 @@ export class CreateUrlDto {
   longUrl: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   shortenUrl: string;
 
   @IsNotEmpty()
-  @ApiProperty({ enum: ['TWO_MINUTES'] })
+  @ApiProperty({ required: false })
   expires: string;
 
   @IsAlphanumeric()
-  @ApiProperty()
   hash: string;
 }

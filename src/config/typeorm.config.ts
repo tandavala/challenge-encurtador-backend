@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 export const typeOrmConfig: TypeOrmModule = {
   type: 'postgres',
-  host: process.env.RDS_HOSTNAME,
+  host: '',
   port: 5432,
   username: process.env.RDS_USERNAME,
   password: process.env.RDS_PASSWORD,

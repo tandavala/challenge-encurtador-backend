@@ -38,4 +38,11 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 
 Para reproduzir este projecto segui - se os passos:
 
-1. C
+### clonando o projecto
+
+Com o Git instalado na sua maquina e a URL do projeto em mãos, cria em algum lugar do seu pc uma pasta para criarmos uma copia do repositório, dentro dela abra o terminal e digite os comandos abaixo:
+
+```
+git clone https://github.com/tandavala/challenge-encurtador-backend.git
+cd
+```
