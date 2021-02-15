@@ -26,7 +26,7 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [x] Limitar as solicitações de API.
 - [x] Limitar o usuario de encurtar o nosso dominio
 - [x] Contenerizar aplicação
-- [] Só poderá eliminar uma url o usuário que criou a url.
+- [ ] Só poderá eliminar uma url o usuário que criou a url.
 - [ ] O sistema deve estar altamente disponível. Quando um usuário usar a URL curta, deve ser redirecionado para a página original
 - [ ] O sistema deve funcionar com latência mínima. A geração de pequenos URLs e o redirecionamento devem ser rápidos
 - [ ] O sistema deve ser escalável, ele deve lidar com a quantidade crescente de criação de URL e solicitações de leitura.
@@ -36,4 +36,6 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 
 # Instruções para rodar o sistema
 
-Para rodar
+Para reproduzir este projecto segui - se os passos:
+
+1. C
