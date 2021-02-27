@@ -3,11 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 export const typeOrmConfig: TypeOrmModule = {
   type: 'postgres',
-  host: '',
-  port: 5432,
-  username: process.env.RDS_USERNAME,
-  password: process.env.RDS_PASSWORD,
-  database: process.env.RDS_DATABASE,
+  host: process.env.POSTGRES_HOST,
+  port: process.env.POSTGRES_PORT,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
   entities: [__dirname + '/../**/*.entity.js'],
   synchronize: true, // but not in production
 };
