@@ -12,9 +12,9 @@ import {
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { URL } from 'url';
-import { CreateUrlDto } from './dto/url.dto';
-import { Url } from './entiry/url.entity';
-import { UrlsService } from './urls.service';
+import { CreateUrlDto } from '../dto/url.dto';
+import { Url } from '../model/url.entity';
+import { UrlsService } from '../service/urls.service';
 
 @ApiTags('urls')
 @Controller('urls')

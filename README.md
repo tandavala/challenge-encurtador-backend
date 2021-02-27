@@ -69,4 +69,12 @@ Para rodar os contaier seguise - se o comanda:
 docker-compose -f prod-docker-compose.yml up --build
 ```
 
-A mesma logica se aplica para os dois ambientes, lembrando que para executar esse comando com sucesso precisamos estar na raiz do projecto. Mas queria destacar aqui o Dockerfile de teste o meu foco principal para esse ficheiro é para rodas os testes quando mandamos novo codigo no repositorio no final o github actions criar uma imagem da aplicação e manda para o Dockerhub.
+A mesma logica se aplica para os dois ambientes, lembrando que para executar esse comando com sucesso precisamos estar na raiz do projecto.
+
+# Ambiente de desenvolvimento
+
+Para rodar o ambiente de desenvolvimento basta estamos na raiz do projecto e executar o comanda abaixa.
+
+```
+docker-compose -f dev-docker-compose.yml up
+```

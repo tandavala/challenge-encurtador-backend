@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Url } from './entiry/url.entity';
-import { UrlValidationTime } from './shared/url-validation-time';
+import { Url } from '../model/url.entity';
+import { UrlValidationTime } from '../shared/url-validation-time';
 import { UrlsService } from './urls.service';
 import * as expires from 'expires';
 import { BadRequestException, ForbiddenException } from '@nestjs/common';

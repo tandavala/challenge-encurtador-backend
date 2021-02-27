@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UrlHasher } from '../utils/url-helpers';
+import { UrlHasher } from '../../utils/url-helpers';
 import { Repository } from 'typeorm';
-import { CreateUrlDto } from './dto/url.dto';
-import { Url } from './entiry/url.entity';
-import { UrlValidationTime } from './shared/url-validation-time';
+import { CreateUrlDto } from '../dto/url.dto';
+import { Url } from '../model/url.entity';
+import { UrlValidationTime } from '../shared/url-validation-time';
 import * as Expires from 'expires';
 import * as crypto from 'crypto-random-string';
 
@@ -39,8 +39,8 @@ export class UrlsService {
 
     const alreadyExist = await this.urlRepo.findOne({ hash: hasher.hash });
 
-    if (alreadyExist)
-      throw new ForbiddenException('Esta url já está sendo usada');
+    /**if (alreadyExist)
+      throw new ForbiddenException('Esta url já está sendo usada'); */
 
     const newUrl = this.urlRepo.create({
       longUrl: hasher.normalizedUrl.toLowerCase(),
