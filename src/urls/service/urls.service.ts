@@ -90,4 +90,8 @@ export class UrlsService {
     }
     return url;
   }
+
+  async delete(id: number): Promise<void> {
+    await this.urlRepo.delete(id);
+  }
 }

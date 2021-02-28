@@ -11,16 +11,16 @@ export class CronService extends NestSchedule {
   constructor(private urlService: UrlsService) {
     super();
   }
-  @Interval(80000, { key: 'schedule-interval' })
+  @Interval(1000, { key: 'schedule-interval' })
   async interval(): Promise<void> {
     const urls = await this.urlService.findAll();
-    urls.forEach((url) => {
+    urls.forEach(async (url) => {
       if (url.expires !== null) {
         const decoded = jwt_decode<JwtDecode>(url.expires);
         const now = Date.now().valueOf() / 1000;
 
         if (typeof decoded.exp !== 'undefined' && decoded.exp < now) {
-          console.log(`ja axpirou ${decoded.longUrl}`);
+          await this.urlService.delete(url.id);
         }
       }
     });
