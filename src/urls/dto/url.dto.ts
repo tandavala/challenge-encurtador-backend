@@ -1,14 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsAlphanumeric,
-  IsDate,
-  IsDateString,
-  IsEmpty,
-  IsNotEmpty,
-  IsOptional,
-  IsUrl,
-  IS_DATE,
-} from 'class-validator';
+import { IsIn, IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
+import { Expires } from './expires.enum';
 
 export class CreateUrlDto {
   @IsNotEmpty()
@@ -19,5 +10,11 @@ export class CreateUrlDto {
   shortenUrl: string;
 
   @IsOptional()
-  expires: string;
+  @IsIn([
+    Expires.TWO_MINUTES,
+    Expires.ONE_DAY,
+    Expires.ONE_WEEk,
+    Expires.ONE_MONTH,
+  ])
+  expires: Expires;
 }

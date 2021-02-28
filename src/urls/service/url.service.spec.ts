@@ -6,6 +6,7 @@ import { Url } from '../model/url.entity';
 import { UrlsService } from './urls.service';
 import { ForbiddenException } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
+import { Expires } from '../dto/expires.enum';
 
 const longUrl = 'https://google.com/';
 const shortenUrl = 'hottopics';
@@ -66,15 +67,18 @@ describe('UrlService', () => {
   describe('create()', () => {
     it('should successfully create a url', () => {
       const now = Date.now();
-      const expires = jwt.sign({ now }, process.env.SECRET_EXPIRES_URL, {
-        expiresIn: '5s',
+
+      const exp = jwt.sign({ now }, process.env.SECRET_EXPIRES_URL, {
+        expiresIn: '2m',
       });
+      oneUrl.expires = exp;
+
       try {
         expect(
           service.create({
             longUrl,
             shortenUrl,
-            expires,
+            expires: Expires.TWO_MINUTES,
           }),
         ).resolves.toEqual(oneUrl);
       } catch (e) {
