@@ -80,7 +80,8 @@ export class UrlsService {
 
   async getByShortenUrl(shortenUrl: string): Promise<Url> {
     const url = await this.urlRepo.findOne({ shortenUrl });
-    if (!url) throw new NotFoundException('Esta url não existe');
+    if (!url)
+      throw new NotFoundException('Esta url não existe ou já não é válida');
 
     const decoded = jwt_decode<JwtDecode>(url.expires);
     const now = Date.now().valueOf() / 1000;

@@ -8,6 +8,7 @@ export const typeOrmConfig: TypeOrmModule = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
+  ssl: process.env.NODE_ENV === 'production' ? true : false,
   entities: [__dirname + '/../**/*.entity.js'],
   synchronize: true, // but not in production
 };
