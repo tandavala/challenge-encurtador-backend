@@ -17,16 +17,13 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [x] Dado uma URL como parâmetro, devemos obter uma URL única curta e aleatória.
 - [x] Dado uma URL encurtada, os usuários devem ser redirecionados para o URL original.
 - [x] Os usuários devem ter a opção de poder escolher um link personalizado.
-- [ ] Os usuários devem, opcionalmente, ser capazes de escolher uma data de expiração.
-- [ ] A nova url curta deve ter a possibilidade de ter data de expiração.
+- [x] Os usuários devem opcionalmente, ser capazes de escolher um periódo de expiração [2 minutos, um dia, uma semana, um mês].
 
 ## Resito não functionais
 
 - [x] Limitar as solicitações de API.
-- [x] Limitar o usuario de encurtar o nosso dominio
 - [x] Contenerizar aplicação
-- [ ] Rodar o cron job para checar se tem uma url que expirou
-- [ ] Só poderá eliminar uma url o usuário que criou a url.
+- [x] Eliminar automaticamente as url expiradas
 - [ ] O sistema deve estar altamente disponível. Quando um usuário usar a URL curta, deve ser redirecionado para a página original
 - [ ] O sistema deve funcionar com latência mínima. A geração de pequenos URLs e o redirecionamento devem ser rápidos
 - [ ] O sistema deve ser escalável, ele deve lidar com a quantidade crescente de criação de URL e solicitações de leitura.
@@ -49,39 +46,30 @@ cd
 
 ### Rodando o sistema
 
-Temos duas formas principais de rodar esse projecto.
+Quero lembra - lo que o projecto tem dois ambientes de execução:
 
-- Podemos rodar esse projecto como uma aplicação normal Nodejs, mais esse não é o foco principal. Basicamente nesse passo é instalar as dependencias e renomear o arquivo `.env.sample` para `.env`, tenha certeze que tens PostgreSQL instalado em sua maquina, informar os dados de acesso a base de dado no arqui .env executar o command `npm install` e posteriomente `npm run start:dev`, que estaras pronto para testar o sistema.
-
-- A segundo forma de rodar o projecto é usando o [Docker](https://www.docker.com/), antes deixa esclarever como configurei o docker no projecto. Este projecto conta com tres ficheiros docker.
-
-1. O primeiro ficheiro docker será usado em produção
-2. O Segundo ficheiro docker será usado em desenvolvimento
-3. O terceiro ficheiro Docker será usado em produção.
-
-Quero lembra - lo que cada fechiro docker conta com um ficheiro docker-compose por exemple o ficher docker para teste lhe chamei de `Dockerfile-test` e o seu Docker compose lhe chamai de `test-docker-compose.yml` assim segui a logica com os outros ficheiros com os prefixos de `dev` e `prod`.
-
-### Rodando os container
-
-Para rodar os contaier seguise - se o comanda:
-
-```
-docker-compose -f prod-docker-compose.yml up --build
-```
-
-A mesma logica se aplica para os dois ambientes, lembrando que para executar esse comando com sucesso precisamos estar na raiz do projecto.
+- Ambiente de desenvolvimente
+- Ambiente de produção
 
 # Ambiente de desenvolvimento
 
-Para rodar o ambiente de desenvolvimento basta estamos na raiz do projecto e executar o comanda abaixa.
+Para rodar o projecto na máquina local certifica que tens o docker e o docker compose configurado, depois disso executa na raiz do projecto o seguinte comando:
 
 ```
 docker-compose -f dev-docker-compose.yml up
 ```
 
+## Ambiente de desenvolvimento
+
+O ambiente de produção pode ser implementado em qualquer cloud que suporta docker, e o comando reponsavel na execução do projecto nas nuvens é o seguinte:
+
+```
+docker-compose -f prod-docker-compose.yml up
+```
+
 # Adminer
 
-Adminer é uma aplicação cliente para gestão de base de dados, no ambiente de desenvolvimento temos acesso a base de dados via Adminer para acessar segua a intrução abaixo
+Adminer é uma aplicação cliente para gestão de base de dados, no ambiente de desenvolvimento temos acesso a base de dados via Adminer, depois de executares podes acessar o adminer:
 
 link: locahost:8080
 
