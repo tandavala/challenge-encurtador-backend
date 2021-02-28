@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Test } from '@nestjs/testing';
 import { createMock } from '@golevelup/nestjs-testing';
 import { getRepositoryToken } from '@nestjs/typeorm';

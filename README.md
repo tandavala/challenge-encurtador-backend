@@ -18,7 +18,6 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [x] Dado uma URL encurtada, os usuários devem ser redirecionados para o URL original.
 - [x] Os usuários devem ter a opção de poder escolher um link personalizado.
 - [ ] Os usuários devem, opcionalmente, ser capazes de escolher uma data de expiração.
-- [ ] O usario poder fazer login via gmail
 - [ ] A nova url curta deve ter a possibilidade de ter data de expiração.
 
 ## Resito não functionais
@@ -26,6 +25,7 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [x] Limitar as solicitações de API.
 - [x] Limitar o usuario de encurtar o nosso dominio
 - [x] Contenerizar aplicação
+- [ ] Rodar o cron job para checar se tem uma url que expirou
 - [ ] Só poderá eliminar uma url o usuário que criou a url.
 - [ ] O sistema deve estar altamente disponível. Quando um usuário usar a URL curta, deve ser redirecionado para a página original
 - [ ] O sistema deve funcionar com latência mínima. A geração de pequenos URLs e o redirecionamento devem ser rápidos
@@ -78,3 +78,17 @@ Para rodar o ambiente de desenvolvimento basta estamos na raiz do projecto e exe
 ```
 docker-compose -f dev-docker-compose.yml up
 ```
+
+# Adminer
+
+Adminer é uma aplicação cliente para gestão de base de dados, no ambiente de desenvolvimento temos acesso a base de dados via Adminer para acessar segua a intrução abaixo
+
+link: locahost:8080
+
+|          |                               |
+| -------- | :---------------------------: |
+| System   |          PostGreSQL           |
+| Server   | challenge-encurtador_postgres |
+| Username |           postgres            |
+| Password |           postgres            |
+| Database |          encurtador           |

@@ -1,11 +1,11 @@
+import 'dotenv/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Url } from '../model/url.entity';
-import { UrlValidationTime } from '../shared/url-validation-time';
 import { UrlsService } from './urls.service';
-import * as expires from 'expires';
-import { BadRequestException, ForbiddenException } from '@nestjs/common';
+import { ForbiddenException } from '@nestjs/common';
+import * as jwt from 'jsonwebtoken';
 
 const longUrl = 'https://google.com/';
 const shortenUrl = 'hottopics';
@@ -22,7 +22,6 @@ const oneUrl = new Url(longUrl, shortenUrl);
 describe('UrlService', () => {
   let service: UrlsService;
   let repo: Repository<Url>;
-  const now = Date.now();
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -66,14 +65,16 @@ describe('UrlService', () => {
   });
   describe('create()', () => {
     it('should successfully create a url', () => {
-      const timestamp = expires.after('2 seconds');
+      const now = Date.now();
+      const expires = jwt.sign({ now }, process.env.SECRET_EXPIRES_URL, {
+        expiresIn: '5s',
+      });
       try {
         expect(
           service.create({
             longUrl,
             shortenUrl,
-            hash: 'ewewewe',
-            expires: timestamp,
+            expires,
           }),
         ).resolves.toEqual(oneUrl);
       } catch (e) {

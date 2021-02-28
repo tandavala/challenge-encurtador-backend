@@ -8,9 +8,8 @@ import { UrlHasher } from '../../utils/url-helpers';
 import { Repository } from 'typeorm';
 import { CreateUrlDto } from '../dto/url.dto';
 import { Url } from '../model/url.entity';
-import { UrlValidationTime } from '../shared/url-validation-time';
-import * as Expires from 'expires';
-import * as crypto from 'crypto-random-string';
+import * as moment from 'moment-timezone';
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class UrlsService {
@@ -25,30 +24,18 @@ export class UrlsService {
     if (!url) throw new NotFoundException('Esta url não existe');
     return url;
   }
+
   async create(createUrlDto: CreateUrlDto): Promise<Url> {
-    const { longUrl, shortenUrl, expires } = createUrlDto;
-    const cryptoUrl = crypto({ length: 10, type: 'url-safe' });
-    const hasher = new UrlHasher(longUrl);
-
-    const shorten = shortenUrl || cryptoUrl;
-    const timestamp = Expires.after(
-      expires === 'ONE_WEEK'
-        ? UrlValidationTime.ONE_WEEK
-        : UrlValidationTime.TWO_MINUTES,
-    );
-
-    const alreadyExist = await this.urlRepo.findOne({ hash: hasher.hash });
-
-    /**if (alreadyExist)
-      throw new ForbiddenException('Esta url já está sendo usada'); */
-
-    const newUrl = this.urlRepo.create({
-      longUrl: hasher.normalizedUrl.toLowerCase(),
-      shortenUrl: shorten,
-      hash: hasher.hash,
-      expires: timestamp,
+    const { longUrl, shortenUrl } = createUrlDto;
+    const expires = jwt.sign({ longUrl }, process.env.SECRET_EXPIRES_URL, {
+      expiresIn: '2m',
     });
 
+    const newUrl = this.urlRepo.create({
+      longUrl: longUrl,
+      shortenUrl: shortenUrl || 'Hds3',
+      expires,
+    });
     await this.urlRepo.save(newUrl);
 
     return newUrl;
@@ -56,6 +43,7 @@ export class UrlsService {
   async findUrl(url: string): Promise<Url> {
     return await this.urlRepo.findOne({ shortenUrl: url });
   }
+
   async getByShortenUrl(shortenUrl: string): Promise<Url> {
     const url = await this.urlRepo.findOne({ shortenUrl });
     if (!url) throw new NotFoundException('Esta url não existe');

@@ -3,6 +3,7 @@ import {
   IsAlphanumeric,
   IsDate,
   IsDateString,
+  IsEmpty,
   IsNotEmpty,
   IsOptional,
   IsUrl,
@@ -12,17 +13,11 @@ import {
 export class CreateUrlDto {
   @IsNotEmpty()
   @IsUrl()
-  @ApiProperty()
   longUrl: string;
 
   @IsOptional()
-  @ApiProperty({ required: false })
   shortenUrl: string;
 
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
+  @IsOptional()
   expires: string;
-
-  @IsAlphanumeric()
-  hash: string;
 }

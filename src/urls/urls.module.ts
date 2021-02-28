@@ -8,5 +8,6 @@ import { UrlsController } from './controller/urls.controller';
   imports: [TypeOrmModule.forFeature([Url])],
   providers: [UrlsService],
   controllers: [UrlsController],
+  exports: [UrlsService],
 })
 export class UrlsModule {}
