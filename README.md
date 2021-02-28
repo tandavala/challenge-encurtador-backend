@@ -19,6 +19,15 @@ Este aplicativo segue as especificações da API definidas pela equipe [Thinkste
 - [x] Os usuários devem ter a opção de poder escolher um link personalizado.
 - [x] Os usuários devem opcionalmente, ser capazes de escolher um periódo de expiração [2 minutos, um dia, uma semana, um mês].
 
+## Documentação
+
+Quando rodamos o projecto em ambiente de produção temos acesso a documentação da api conforme o link abaixo:
+
+```
+{base_url}/doc
+
+```
+
 ## Resito não functionais
 
 - [x] Limitar as solicitações de API.
@@ -41,7 +50,7 @@ Com o Git instalado na sua maquina e a URL do projeto em mãos, cria em algum lu
 
 ```
 git clone https://github.com/tandavala/challenge-encurtador-backend.git
-cd
+cd challenge-encurtador-backend
 ```
 
 ### Rodando o sistema
@@ -51,7 +60,7 @@ Quero lembra - lo que o projecto tem dois ambientes de execução:
 - Ambiente de desenvolvimente
 - Ambiente de produção
 
-# Ambiente de desenvolvimento
+### Ambiente de desenvolvimento
 
 Para rodar o projecto na máquina local certifica que tens o docker e o docker compose configurado, depois disso executa na raiz do projecto o seguinte comando:
 
@@ -59,7 +68,7 @@ Para rodar o projecto na máquina local certifica que tens o docker e o docker c
 docker-compose -f dev-docker-compose.yml up
 ```
 
-## Ambiente de desenvolvimento
+### Ambiente de desenvolvimento
 
 O ambiente de produção pode ser implementado em qualquer cloud que suporta docker, e o comando reponsavel na execução do projecto nas nuvens é o seguinte:
 
@@ -67,7 +76,15 @@ O ambiente de produção pode ser implementado em qualquer cloud que suporta doc
 docker-compose -f prod-docker-compose.yml up
 ```
 
-# Adminer
+### Documentação
+
+Para acessar a documentação da api use o link abaixa:
+
+```
+{base_url}/doc
+```
+
+### Adminer
 
 Adminer é uma aplicação cliente para gestão de base de dados, no ambiente de desenvolvimento temos acesso a base de dados via Adminer, depois de executares podes acessar o adminer:
 

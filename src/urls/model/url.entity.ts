@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   BaseEntity,
   Column,
@@ -9,18 +10,23 @@ import {
 
 @Entity()
 export class Url {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column()
   longUrl: string;
 
+  @ApiProperty()
   @Column()
   hash: string;
 
+  @ApiProperty()
   @Column()
   shortenUrl: string;
 
+  @ApiProperty()
   @Column()
   expires: string;
 
