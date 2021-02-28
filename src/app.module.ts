@@ -10,7 +10,7 @@ import { ScheduleModule } from 'nest-schedule';
   imports: [
     ScheduleModule.register({}),
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot(typeOrmConfig),
+    TypeOrmModule.forRoot(s),
     UrlsModule,
     CronModule,
   ],

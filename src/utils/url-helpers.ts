@@ -1,6 +1,5 @@
 import * as md5 from 'md5';
 import * as URI from 'uri-js';
-import * as nanoid from 'nanoid';
 import * as crypto from 'crypto';
 export class UrlHasher {
   private url: string;
